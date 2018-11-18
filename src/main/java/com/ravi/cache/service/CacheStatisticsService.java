@@ -1,6 +1,7 @@
 package com.ravi.cache.service;
 
 import com.ravi.dto.CacheData;
+import com.ravi.dto.CacheDetails;
 
 import javax.cache.Cache;
 
@@ -9,5 +10,8 @@ import javax.cache.Cache;
  */
 public interface CacheStatisticsService {
 
-    CacheData getStatistics(String cacheAliasName);
+    CacheData getStatistics(String cacheAliasName, Class cacheKeyClass, Class cacheObjectClass);
+
+    CacheDetails getAllCacheStatistics();
+
 }

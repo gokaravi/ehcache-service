@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
- * Created by yc05r2g on 5/11/2017.
+ * Created by Ravi Goka on 5/11/2017.
  */
 public class Users {
 

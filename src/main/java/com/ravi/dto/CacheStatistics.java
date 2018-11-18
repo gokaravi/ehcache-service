@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import java.io.Serializable;
 
 /**
- * Created by YC05R2G on 11/17/2018.
+ * Created by Ravi Goka on 11/17/2018.
  */
 @JsonPropertyOrder({"averageGetTime", "averagePutTime", "averageRemoveTime", "cacheEvictions", "cacheGets", "cacheHitPercentage", "cacheHits", "cacheMisses", "cacheMissPercentage", "cachePuts", "cacheRemovals"})
 @JsonRootName("statistics")

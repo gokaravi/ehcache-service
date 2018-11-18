@@ -2,30 +2,23 @@ package com.ravi.cache.service.impl;
 
 import com.ravi.cache.service.CacheStatisticsService;
 import com.ravi.dto.CacheData;
-import com.ravi.dto.CacheStatistics;
-import com.ravi.dto.Users;
+import com.ravi.dto.CacheDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.cache.Cache;
-import javax.cache.CacheException;
 import javax.cache.CacheManager;
-import javax.management.MBeanServer;
-import javax.management.MalformedObjectNameException;
-import javax.management.ObjectName;
-import java.lang.management.ManagementFactory;
-import java.util.Iterator;
-import java.util.OptionalLong;
+import java.util.ArrayList;
+import java.util.List;
 
-import static com.ravi.constants.CacheConstants.*;
 
 /**
- * Created by YC05R2G on 11/17/2018.
+ * Created by Ravi Goka on 11/17/2018.
  */
 @Component
-public class CacheStatisticsServiceImpl implements CacheStatisticsService {
+public class CacheStatisticsServiceImpl extends BaseCacheStatisticsServiceImpl implements CacheStatisticsService{
 
     private static final Logger LOG = LoggerFactory.getLogger(CacheStatisticsServiceImpl.class);
 
@@ -33,98 +26,51 @@ public class CacheStatisticsServiceImpl implements CacheStatisticsService {
     private CacheManager cacheManager;
 
     @Override
-    public CacheData getStatistics(String cacheAliasName) {
+    public CacheData getStatistics(String cacheAliasName, Class cacheKeyClass, Class cacheObjectClass) {
+        if(LOG.isDebugEnabled()) {
+            LOG.debug("START :: Getting the statistics for cache: {}, key class: {} and cache object class: {}", cacheAliasName, cacheKeyClass, cacheObjectClass);
+        }
         CacheData cacheData = new CacheData();
         cacheData.setName(cacheAliasName);
         cacheData.setEnabled(true);
 
-        Cache<String, Users> usersCache = cacheManager.getCache(cacheAliasName, String.class, Users.class);
+        Cache<String, Object> usersCache = cacheManager.getCache(cacheAliasName, cacheKeyClass, cacheObjectClass);
 
         cacheData.setCacheStatistics(getStatistics(usersCache));
+        if(LOG.isDebugEnabled()) {
+            LOG.debug("The cache data: {}", cacheData);
+            LOG.debug("END :: Getting the statistics for cache: {}, key class: {} and cache object class: {}", cacheAliasName, cacheKeyClass, cacheObjectClass);
+        }
         return cacheData;
     }
 
-    private CacheStatistics getStatistics(Cache<? extends Object, ? extends Object> cache) {
-        CacheStatistics cacheStatistics = null;
-        try {
-            ObjectName objectName = getJMXObjectName(cache);
-            MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
-
-            // retrieving the cache statistics from MBeanServer.
-            cacheStatistics = mapStatistics(mBeanServer, objectName);
-
+    @Override
+    public CacheDetails getAllCacheStatistics(){
+        if(LOG.isDebugEnabled()) {
+            LOG.debug("START :: Getting the statistics for all the cache");
         }
-        catch (Exception e) {
-            throw new RuntimeException(e);
+       CacheDetails cacheDetails = new CacheDetails();
+        List<CacheData> cacheDataList = null;
+        Iterable<String> allCacheNames = cacheManager.getCacheNames();
+        if(null != allCacheNames){
+            cacheDataList = new ArrayList<>();
+            for(String cacheAliasName : allCacheNames){
+                Cache<String, Object> cacheObject =  cacheManager.getCache(cacheAliasName, String.class, Object.class);
+                CacheData cacheData = new CacheData();
+                cacheData.setName(cacheAliasName);
+                cacheData.setEnabled(true);
+                cacheData.setCacheStatistics(getStatistics(cacheObject));
+                cacheDataList.add(cacheData);
+            }
         }
-        return cacheStatistics;
-    }
-    private ObjectName getJMXObjectName(Cache<? extends Object, ? extends Object> cache){
-        MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
-
-        // Refer to org.ehcache.jsr107.Eh107CacheStatisticsMXBean.Eh107CacheStatisticsMXBean(String, URI, StatisticsService)
-        // and org.ehcache.jsr107.Eh107MXBean.Eh107MXBean(String, URI, String)
-        String cacheManagerName = sanitize(cache.getCacheManager().getURI().toString());
-        String cacheName = sanitize(cache.getName());
-        ObjectName objectName = null;
-        try {
-            objectName = new ObjectName(
-                    "javax.cache:type=" + CACHE_STATISTICS_BEAN + ",CacheManager=" + cacheManagerName + ",Cache=" + cacheName);
+        if(null != cacheDataList && cacheDataList.size() > 0) {
+            cacheDetails.setCacheData(cacheDataList);
         }
-        catch (MalformedObjectNameException e) {
-            throw new CacheException(e);
+        if(LOG.isDebugEnabled()) {
+            LOG.debug("The cache details: {}", cacheDetails);
+            LOG.debug("END :: Getting the statistics for all the cache");
         }
-
-        if(!mBeanServer.isRegistered(objectName)){
-            throw new CacheException("No MBean found with ObjectName => " + objectName.getCanonicalName());
-        }
-
-        return objectName;
-    }
-
-    private String sanitize(String string) {
-        return ((string == null) ? "" : string.replaceAll(",|:|=|\n", "."));
-    }
-
-    public <K extends Object, V extends Object> long getSize(Cache<K, V> cache) {
-        Iterator<Cache.Entry<K, V>> itr = cache.iterator();
-        long count = 0;
-        while(itr.hasNext()){
-            itr.next();
-            count++;
-        }
-        return count;
-    }
-
-    public <K extends Object, V extends Object> String dump(Cache<K, V> cache) {
-        Iterator<Cache.Entry<K, V>> itr = cache.iterator();
-        StringBuffer b = new StringBuffer();
-        while(itr.hasNext()){
-            Cache.Entry<K, V> entry = itr.next();
-            b.append(entry.getKey() + "=" + entry.getValue() + "\n");
-        }
-        return b.toString();
-    }
-
-    private CacheStatistics mapStatistics(MBeanServer mBeanServer, ObjectName objectName){
-        CacheStatistics cacheStatistics = new CacheStatistics();
-        try {
-            cacheStatistics.setCacheHits((long)mBeanServer.getAttribute(objectName, CACHE_HITS));
-            cacheStatistics.setCacheHitPercentage((float)mBeanServer.getAttribute(objectName, CACHE_HIT_PERCENTAGE));
-            cacheStatistics.setCacheMisses((long)mBeanServer.getAttribute(objectName, CACHE_MISSES));
-            cacheStatistics.setCacheMissPercentage((float)mBeanServer.getAttribute(objectName, CACHE_MISS_PERCENTAGE));
-            cacheStatistics.setCacheGets((long)mBeanServer.getAttribute(objectName, CACHE_GETS));
-            cacheStatistics.setCachePuts((long)mBeanServer.getAttribute(objectName, CACHE_PUTS));
-            cacheStatistics.setCacheRemovals((long)mBeanServer.getAttribute(objectName, CACHE_REMOVALS));
-            cacheStatistics.setCacheEvictions((long)mBeanServer.getAttribute(objectName, CACHE_EVICTIONS));
-            cacheStatistics.setAverageGetTime((float)mBeanServer.getAttribute(objectName, CACHE_AVERAGE_GET_TIME));
-            cacheStatistics.setAveragePutTime((float)mBeanServer.getAttribute(objectName, CACHE_AVERAGE_PUT_TIME));
-            cacheStatistics.setAverageRemoveTime((float)mBeanServer.getAttribute(objectName, CACHE_AVERAGE_REMOVE_TIME));
-        }
-        catch (Exception ex){
-            LOG.error("Exception occurred while reading the cache statistics from Eh107CacheStatisticsMXBean", ex);
-        }
-        return cacheStatistics;
+        return cacheDetails;
     }
 
 }

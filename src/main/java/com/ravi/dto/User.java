@@ -1,7 +1,7 @@
 package com.ravi.dto;
 
 /**
- * Created by yc05r2g on 5/11/2017.
+ * Created by Ravi Goka on 5/11/2017.
  */
 public class User {
 

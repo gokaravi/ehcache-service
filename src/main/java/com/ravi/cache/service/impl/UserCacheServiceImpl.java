@@ -28,15 +28,22 @@ public class UserCacheServiceImpl implements UserCacheService {
 
     @Override
     public Users getAllUsers(){
+        if(LOG.isDebugEnabled()){
+            LOG.debug("START :: Getting all users");
+        }
         Users users;
-        Cache<String, Users> usersCache = cacheManager.getCache(USER_CACHE_ALIAS, String.class, Users.class);
-        users = usersCache.get(USER_CACHE_KEY);
-		LOG.info("Reading user information from Cache :: {}", users);
+        Cache<String, Object> usersCache = cacheManager.getCache(USER_CACHE_ALIAS, String.class, Object.class);
+        users = (Users)usersCache.get(USER_CACHE_KEY);
         if(null == users){
-    		LOG.info("Data Not found in Cache", users);
-        	users = userService.getUsers();
-        	LOG.info("Reading user information from DB");
+            if(LOG.isDebugEnabled()){
+                LOG.debug("Data Not found in Cache", users);
+                LOG.debug("Reading user information from service/DB");
+            }
+            users = userService.getUsers();
             usersCache.put(USER_CACHE_KEY, users);
+        }
+        if(LOG.isDebugEnabled()){
+            LOG.debug("END :: Getting all users: {}", users);
         }
         return users;
     }

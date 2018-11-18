@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 
 /**
- * Created by YC05R2G on 11/17/2018.
+ * Created by Ravi Goka on 11/17/2018.
  */
 public class CacheData implements Serializable{
     private String name;

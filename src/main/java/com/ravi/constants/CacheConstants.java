@@ -7,6 +7,8 @@ public class CacheConstants {
 
     public static final String USER_CACHE_ALIAS = "userCache";
     public static final String USER_CACHE_KEY = "allUsers";
+    public static final String TEACHER_CACHE_ALIAS = "teacherCache";
+    public static final String TEACHER_CACHE_KEY = "allTeachers";
     public static final String CACHE_STATISTICS_BEAN = "CacheStatistics";
     public static final String CACHE_HITS = "CacheHits";
     public static final String CACHE_HIT_PERCENTAGE = "CacheHitPercentage";

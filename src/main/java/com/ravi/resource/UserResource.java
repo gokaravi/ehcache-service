@@ -18,6 +18,9 @@ import com.ravi.dto.Users;
 
 import static com.ravi.constants.CacheConstants.USER_CACHE_ALIAS;
 
+/**
+ * Created by Ravi Goka on 11/18/2018.
+ */
 @Path("/user/v1")
 public class UserResource {
 
@@ -32,20 +35,14 @@ public class UserResource {
 	@GET
 	@Produces("application/json")
 	public Users getAllUsers() {
-		LOG.info("Inside health check resource GET method");
+		if(LOG.isDebugEnabled()) {
+			LOG.debug("START :: Getting all users");
+		}
 		Users users = userCacheService.getAllUsers();
-		LOG.info("The users list: " + users);
+		if(LOG.isDebugEnabled()) {
+			LOG.info("The users list: {}", users);
+			LOG.debug("END :: Getting all users");
+		}
 		return users;
-	}
-
-
-	@GET
-	@Path("/stats")
-	@Produces("application/json")
-	public Response getStatistics() {
-		LOG.info("Inside health check resource GET method");
-		CacheData cacheData = cacheStatisticsService.getStatistics(USER_CACHE_ALIAS);
-		LOG.info("The users list: " + cacheData);
-		return Response.status(Response.Status.OK).entity(cacheData).build();
 	}
 }

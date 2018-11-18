@@ -18,8 +18,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Users getUsers(){
-        LOG.info("Retrieving from service call....");
-        User user1 = new User(1, "David", "Meyer");
+        if(LOG.isDebugEnabled()){
+            LOG.debug("START :: Getting all users");
+        }
+        User user1 = new User(1, "Ricky", "Ponting");
         User user2 = new User(2, "Sunil", "Gavaskar");
         User user3 = new User(3, "Md.", "Azharuddin");
         User user4 = new User(4, "Aravinda", "De Silva");
@@ -31,6 +33,9 @@ public class UserServiceImpl implements UserService {
         usersList.add(user4);
         usersList.add(user5);
         Users users = new Users(usersList);
+        if(LOG.isDebugEnabled()){
+            LOG.debug("END :: Getting all users: {}", users);
+        }
         return users;
     }
 }
