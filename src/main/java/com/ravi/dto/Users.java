@@ -1,15 +1,19 @@
 package com.ravi.dto;
 
+import java.io.Serializable;
 import java.util.List;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Created by Ravi Goka on 5/11/2017.
  */
-public class Users {
+public class Users implements Serializable {
 
-    public Users(List<User> users){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5605748419820569559L;
+
+	public Users(List<User> users){
         this.users = users;
     }
 

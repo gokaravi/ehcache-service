@@ -1,20 +1,31 @@
 package com.ravi.cache.service.impl;
 
-import com.ravi.dto.CacheStatistics;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static com.ravi.constants.CacheConstants.CACHE_AVERAGE_GET_TIME;
+import static com.ravi.constants.CacheConstants.CACHE_AVERAGE_PUT_TIME;
+import static com.ravi.constants.CacheConstants.CACHE_AVERAGE_REMOVE_TIME;
+import static com.ravi.constants.CacheConstants.CACHE_EVICTIONS;
+import static com.ravi.constants.CacheConstants.CACHE_GETS;
+import static com.ravi.constants.CacheConstants.CACHE_HITS;
+import static com.ravi.constants.CacheConstants.CACHE_HIT_PERCENTAGE;
+import static com.ravi.constants.CacheConstants.CACHE_MISSES;
+import static com.ravi.constants.CacheConstants.CACHE_MISS_PERCENTAGE;
+import static com.ravi.constants.CacheConstants.CACHE_PUTS;
+import static com.ravi.constants.CacheConstants.CACHE_REMOVALS;
+import static com.ravi.constants.CacheConstants.CACHE_STATISTICS_BEAN;
+
+import java.lang.management.ManagementFactory;
+import java.util.Iterator;
 
 import javax.cache.Cache;
 import javax.cache.CacheException;
 import javax.management.MBeanServer;
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
-import java.lang.management.ManagementFactory;
-import java.util.Iterator;
 
-import static com.ravi.constants.CacheConstants.*;
-import static com.ravi.constants.CacheConstants.CACHE_AVERAGE_PUT_TIME;
-import static com.ravi.constants.CacheConstants.CACHE_AVERAGE_REMOVE_TIME;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.ravi.dto.CacheStatistics;
 
 /**
  * Created by Ravi Goka on 11/18/2018.

@@ -7,7 +7,12 @@ import java.io.Serializable;
  */
 public class Teacher implements Serializable {
 
-    private int id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -746714052215319356L;
+	
+	private int id;
     private String subject;
     private String grade;
     private String firstName;

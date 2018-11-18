@@ -8,7 +8,12 @@ import java.io.Serializable;
  * Created by Ravi Goka on 11/17/2018.
  */
 public class CacheData implements Serializable{
-    private String name;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 674669199409003727L;
+	
+	private String name;
     private boolean enabled;
     @JsonProperty("statistics")
     private CacheStatistics cacheStatistics;

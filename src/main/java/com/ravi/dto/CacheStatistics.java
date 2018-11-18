@@ -8,125 +8,131 @@ import java.io.Serializable;
 /**
  * Created by Ravi Goka on 11/17/2018.
  */
-@JsonPropertyOrder({"averageGetTime", "averagePutTime", "averageRemoveTime", "cacheEvictions", "cacheGets", "cacheHitPercentage", "cacheHits", "cacheMisses", "cacheMissPercentage", "cachePuts", "cacheRemovals"})
+@JsonPropertyOrder({ "averageGetTime", "averagePutTime", "averageRemoveTime", "cacheEvictions", "cacheGets",
+		"cacheHitPercentage", "cacheHits", "cacheMisses", "cacheMissPercentage", "cachePuts", "cacheRemovals" })
 @JsonRootName("statistics")
-public class CacheStatistics implements Serializable{
+public class CacheStatistics implements Serializable {
 
-  private float averageGetTime;
-  private float averagePutTime;
-  private float averageRemoveTime;
-  private long cacheEvictions;
-  private long cacheGets;
-  private float cacheHitPercentage;
-  private long cacheHits;
-  private long cacheMisses;
-  private float cacheMissPercentage;
-  private long cachePuts;
-  private long cacheRemovals;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2127894752626293966L;
 
-    public float getAverageGetTime() {
-        return averageGetTime;
-    }
+	private float averageGetTime;
+	private float averagePutTime;
+	private float averageRemoveTime;
+	private long cacheEvictions;
+	private long cacheGets;
+	private float cacheHitPercentage;
+	private long cacheHits;
+	private long cacheMisses;
+	private float cacheMissPercentage;
+	private long cachePuts;
+	private long cacheRemovals;
 
-    public void setAverageGetTime(float averageGetTime) {
-        this.averageGetTime = averageGetTime;
-    }
+	public float getAverageGetTime() {
+		return averageGetTime;
+	}
 
-    public float getAveragePutTime() {
-        return averagePutTime;
-    }
+	public void setAverageGetTime(float averageGetTime) {
+		this.averageGetTime = averageGetTime;
+	}
 
-    public void setAveragePutTime(float averagePutTime) {
-        this.averagePutTime = averagePutTime;
-    }
+	public float getAveragePutTime() {
+		return averagePutTime;
+	}
 
-    public float getAverageRemoveTime() {
-        return averageRemoveTime;
-    }
+	public void setAveragePutTime(float averagePutTime) {
+		this.averagePutTime = averagePutTime;
+	}
 
-    public void setAverageRemoveTime(float averageRemoveTime) {
-        this.averageRemoveTime = averageRemoveTime;
-    }
+	public float getAverageRemoveTime() {
+		return averageRemoveTime;
+	}
 
-    public long getCacheEvictions() {
-        return cacheEvictions;
-    }
+	public void setAverageRemoveTime(float averageRemoveTime) {
+		this.averageRemoveTime = averageRemoveTime;
+	}
 
-    public void setCacheEvictions(long cacheEvictions) {
-        this.cacheEvictions = cacheEvictions;
-    }
+	public long getCacheEvictions() {
+		return cacheEvictions;
+	}
 
-    public long getCacheGets() {
-        return cacheGets;
-    }
+	public void setCacheEvictions(long cacheEvictions) {
+		this.cacheEvictions = cacheEvictions;
+	}
 
-    public void setCacheGets(long cacheGets) {
-        this.cacheGets = cacheGets;
-    }
+	public long getCacheGets() {
+		return cacheGets;
+	}
 
-    public float getCacheHitPercentage() {
-        return cacheHitPercentage;
-    }
+	public void setCacheGets(long cacheGets) {
+		this.cacheGets = cacheGets;
+	}
 
-    public void setCacheHitPercentage(float cacheHitPercentage) {
-        this.cacheHitPercentage = cacheHitPercentage;
-    }
+	public float getCacheHitPercentage() {
+		return cacheHitPercentage;
+	}
 
-    public long getCacheHits() {
-        return cacheHits;
-    }
+	public void setCacheHitPercentage(float cacheHitPercentage) {
+		this.cacheHitPercentage = cacheHitPercentage;
+	}
 
-    public void setCacheHits(long cacheHits) {
-        this.cacheHits = cacheHits;
-    }
+	public long getCacheHits() {
+		return cacheHits;
+	}
 
-    public long getCacheMisses() {
-        return cacheMisses;
-    }
+	public void setCacheHits(long cacheHits) {
+		this.cacheHits = cacheHits;
+	}
 
-    public void setCacheMisses(long cacheMisses) {
-        this.cacheMisses = cacheMisses;
-    }
+	public long getCacheMisses() {
+		return cacheMisses;
+	}
 
-    public float getCacheMissPercentage() {
-        return cacheMissPercentage;
-    }
+	public void setCacheMisses(long cacheMisses) {
+		this.cacheMisses = cacheMisses;
+	}
 
-    public void setCacheMissPercentage(float cacheMissPercentage) {
-        this.cacheMissPercentage = cacheMissPercentage;
-    }
+	public float getCacheMissPercentage() {
+		return cacheMissPercentage;
+	}
 
-    public long getCachePuts() {
-        return cachePuts;
-    }
+	public void setCacheMissPercentage(float cacheMissPercentage) {
+		this.cacheMissPercentage = cacheMissPercentage;
+	}
 
-    public void setCachePuts(long cachePuts) {
-        this.cachePuts = cachePuts;
-    }
+	public long getCachePuts() {
+		return cachePuts;
+	}
 
-    public long getCacheRemovals() {
-        return cacheRemovals;
-    }
+	public void setCachePuts(long cachePuts) {
+		this.cachePuts = cachePuts;
+	}
 
-    public void setCacheRemovals(long cacheRemovals) {
-        this.cacheRemovals = cacheRemovals;
-    }
+	public long getCacheRemovals() {
+		return cacheRemovals;
+	}
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("CacheStastics{");
-        sb.append("averageGetTime=").append(averageGetTime);
-        sb.append(", averagePutTime=").append(averagePutTime);
-        sb.append(", averageRemoveTime=").append(averageRemoveTime);
-        sb.append(", cacheEvictions=").append(cacheEvictions);
-        sb.append(", cacheGets=").append(cacheGets);
-        sb.append(", cacheHitPercentage=").append(cacheHitPercentage);
-        sb.append(", cacheHits=").append(cacheHits);
-        sb.append(", cacheMisses=").append(cacheMisses);
-        sb.append(", cacheMissPercentage=").append(cacheMissPercentage);
-        sb.append(", cachePuts=").append(cachePuts);
-        sb.append(", cacheRemovals=").append(cacheRemovals);
-        sb.append('}');
-        return sb.toString();
-    }
+	public void setCacheRemovals(long cacheRemovals) {
+		this.cacheRemovals = cacheRemovals;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("CacheStastics{");
+		sb.append("averageGetTime=").append(averageGetTime);
+		sb.append(", averagePutTime=").append(averagePutTime);
+		sb.append(", averageRemoveTime=").append(averageRemoveTime);
+		sb.append(", cacheEvictions=").append(cacheEvictions);
+		sb.append(", cacheGets=").append(cacheGets);
+		sb.append(", cacheHitPercentage=").append(cacheHitPercentage);
+		sb.append(", cacheHits=").append(cacheHits);
+		sb.append(", cacheMisses=").append(cacheMisses);
+		sb.append(", cacheMissPercentage=").append(cacheMissPercentage);
+		sb.append(", cachePuts=").append(cachePuts);
+		sb.append(", cacheRemovals=").append(cacheRemovals);
+		sb.append('}');
+		return sb.toString();
+	}
 }

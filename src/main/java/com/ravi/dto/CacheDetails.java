@@ -10,7 +10,12 @@ import java.util.List;
  */
 public class CacheDetails implements Serializable {
 
-    @JsonProperty("caches")
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1002366696974949398L;
+	
+	@JsonProperty("caches")
     private List<CacheData> cacheData;
 
     public List<CacheData> getCacheData() {

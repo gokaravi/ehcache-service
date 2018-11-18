@@ -1,11 +1,18 @@
 package com.ravi.dto;
 
+import java.io.Serializable;
+
 /**
  * Created by Ravi Goka on 5/11/2017.
  */
-public class User {
+public class User implements Serializable{
 
-    private int userId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -414900542027962124L;
+
+	private int userId;
 
     private String firstName;
 

@@ -1,5 +1,11 @@
 package com.ravi.cache.service.impl;
 
+import static com.ravi.constants.CacheConstants.USER_CACHE_ALIAS;
+import static com.ravi.constants.CacheConstants.USER_CACHE_KEY;
+
+import javax.cache.Cache;
+import javax.cache.CacheManager;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +14,6 @@ import org.springframework.stereotype.Component;
 import com.ravi.cache.service.UserCacheService;
 import com.ravi.cache.service.UserService;
 import com.ravi.dto.Users;
-
-import javax.cache.Cache;
-import javax.cache.CacheManager;
-
-import static com.ravi.constants.CacheConstants.USER_CACHE_ALIAS;
-import static com.ravi.constants.CacheConstants.USER_CACHE_KEY;
 
 @Component
 public class UserCacheServiceImpl implements UserCacheService {

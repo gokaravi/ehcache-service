@@ -8,7 +8,12 @@ import java.util.List;
  */
 public class Teachers implements Serializable{
 
-    public Teachers(List<Teacher> teachers){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8556814059394737180L;
+
+	public Teachers(List<Teacher> teachers){
         this.teachers = teachers;
     }
     private List<Teacher> teachers;
