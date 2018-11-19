@@ -25,8 +25,8 @@ public class TeacherServiceImpl implements TeacherService {
         teacher1.setId(12736);
         teacher1.setGrade("First Grade");
         teacher1.setSubject("General Science");
-        teacher1.setFirstName("John");
-        teacher1.setLastName("Davis");
+        teacher1.setFirstName("Bill");
+        teacher1.setLastName("Clinton");
 
         Teacher teacher2 = new Teacher();
         teacher2.setId(473782);

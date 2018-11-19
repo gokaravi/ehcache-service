@@ -34,20 +34,22 @@ public class BaseCacheStatisticsServiceImpl {
 
     private static final Logger LOG = LoggerFactory.getLogger(BaseCacheStatisticsServiceImpl.class);
 
-    protected CacheStatistics getStatistics(Cache<? extends Object, ? extends Object> cache) {
-        CacheStatistics cacheStatistics = null;
-        try {
-            ObjectName objectName = getJMXObjectName(cache);
-            MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
-            // retrieving the cache statistics from MBeanServer.
-            cacheStatistics = mapStatistics(mBeanServer, objectName);
-        }
-        catch (Exception ex) {
-            LOG.error("ERROR :: Exception occurred while getting the statistics for cache {} and the exception {}", cache, ex);
-            throw new RuntimeException(ex);
-        }
-        return cacheStatistics;
-    }
+	protected CacheStatistics getStatistics(Cache<? extends Object, ? extends Object> cache) {
+		CacheStatistics cacheStatistics = null;
+		try {
+			if (null != cache) {
+				ObjectName objectName = getJMXObjectName(cache);
+				MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
+				// retrieving the cache statistics from MBeanServer.
+				cacheStatistics = mapStatistics(mBeanServer, objectName);
+			}
+		} catch (Exception ex) {
+			LOG.error("ERROR :: Exception occurred while getting the statistics for cache {} and the exception {}",
+					cache, ex);
+			throw new RuntimeException(ex);
+		}
+		return cacheStatistics;
+	}
     private ObjectName getJMXObjectName(Cache<? extends Object, ? extends Object> cache){
         MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
 

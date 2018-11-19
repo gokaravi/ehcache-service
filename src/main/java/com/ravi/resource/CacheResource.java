@@ -19,7 +19,7 @@ import com.ravi.dto.CacheDetails;
 /**
  * Created by Ravi Goka on 11/18/2018.
  */
-@Path("/cache/v1")
+@Path("/cache/data/v1")
 public class CacheResource {
 
 	private static final Logger LOG = LoggerFactory.getLogger(CacheResource.class);

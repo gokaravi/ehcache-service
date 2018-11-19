@@ -3,6 +3,7 @@ package com.ravi.resource;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,7 @@ public class TeacherResource {
 
     @GET
     @Produces("application/json")
-    public Teachers getAllTeachers() {
+    public Response getAllTeachers() {
         if(LOG.isDebugEnabled()) {
             LOG.debug("START :: Getting all teachers");
         }
@@ -33,6 +34,6 @@ public class TeacherResource {
             LOG.debug("The teachers list: {}", teachers);
             LOG.debug("END :: Getting all teachers");
         }
-        return teachers;
+        return Response.status(Response.Status.OK).entity(teachers).build();
     }
 }

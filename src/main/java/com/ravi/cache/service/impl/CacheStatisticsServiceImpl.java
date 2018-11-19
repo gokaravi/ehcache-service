@@ -32,10 +32,10 @@ public class CacheStatisticsServiceImpl extends BaseCacheStatisticsServiceImpl i
         }
         CacheData cacheData = new CacheData();
         cacheData.setName(cacheAliasName);
-        cacheData.setEnabled(true);
-
         Cache<String, Object> usersCache = cacheManager.getCache(cacheAliasName, cacheKeyClass, cacheObjectClass);
-
+        if(null != usersCache) {
+        cacheData.setEnabled(!usersCache.isClosed());	
+        }
         cacheData.setCacheStatistics(getStatistics(usersCache));
         if(LOG.isDebugEnabled()) {
             LOG.debug("The cache data: {}", cacheData);
@@ -58,7 +58,9 @@ public class CacheStatisticsServiceImpl extends BaseCacheStatisticsServiceImpl i
                 Cache<String, Object> cacheObject =  cacheManager.getCache(cacheAliasName, String.class, Object.class);
                 CacheData cacheData = new CacheData();
                 cacheData.setName(cacheAliasName);
-                cacheData.setEnabled(true);
+                if(null != cacheObject) {
+                    cacheData.setEnabled(!cacheObject.isClosed());	
+                    }
                 cacheData.setCacheStatistics(getStatistics(cacheObject));
                 cacheDataList.add(cacheData);
             }

@@ -4,6 +4,11 @@ import com.ravi.dto.Users;
 
 public interface UserCacheService {
 
-    Users getAllUsers();
+	/**
+	 * Method to get all users details
+	 * 
+	 * @return Users
+	 */
+	Users getAllUsers();
 
 }
