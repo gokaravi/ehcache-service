@@ -52,7 +52,7 @@ public class AppConfig extends SpringBootServletInitializer {
             cacheManager = cachingProvider.getCacheManager(uri, getClass().getClassLoader());
         }
         catch(Exception ioe){
-            LOG.error("ERROR :: Error occurred while initializing cache manager. Cannot load the preferences-ehcache.xml file.", ioe);
+            LOG.error("ERROR :: Error occurred while initializing cache manager. Cannot load the ehcache.xml file.", ioe);
         }
         return cacheManager;
     }
