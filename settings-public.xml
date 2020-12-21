@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+   
+  <localRepository>C:/Users/xxxx/.m2/repository</localRepository>
+  <interactiveMode>true</interactiveMode>
+  <usePluginRegistry>false</usePluginRegistry>
+  <offline>false</offline>
+ 
+  <pluginGroups>
+       <pluginGroup>org.mortbay.jetty</pluginGroup>
+       <pluginGroup>your.own.plugin.groupId</pluginGroup>      
+  </pluginGroups>
+ 
+  
+ 
+  <mirrors>
+    <mirror>
+      <id>centralmirror</id>
+      <name>Apache maven central mirror Spain</name>
+      <url>https://repo1.maven.org/maven2/</url>
+      <mirrorOf>maven_central</mirrorOf>
+    </mirror>
+    <mirror>
+      <id>jcg_mirror</id>
+      <name>Java Code Gueeks Mirror Spain</name>
+      <url>http://downloads.jcgmirror.com/public/jcg</url>
+      <mirrorOf>javacodegueeks_repo</mirrorOf>
+    </mirror>
+  </mirrors>
+ 
+ 
+ </settings>
